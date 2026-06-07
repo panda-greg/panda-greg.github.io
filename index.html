@@ -17,6 +17,7 @@
     --muted:#7a766c;
     --line:#d8d2c4;
     --line-strong:#c5bdab;
+    --grid:#e8e3d8;
     --accent:#1b4d5b;
     --accent-soft:#2f6b7a;
     --highlight:#b9622f;
@@ -31,8 +32,8 @@
     color:var(--ink);
     background-color:var(--paper);
     background-image:
-      linear-gradient(var(--line) 1px,transparent 1px),
-      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
     background-size:34px 34px;
     background-position:-1px -1px;
     line-height:1.65;
@@ -56,21 +57,21 @@
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}}
 
   /* ---------- header ---------- */
-  header{padding:72px 0 26px;}
-  .topline{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:26px;display:flex;gap:14px;align-items:center;}
+  header{padding:52px 0 20px;}
+  .topline{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;gap:14px;align-items:center;}
   .topline::after{content:"";flex:1;height:1px;background:var(--line-strong);}
-  .head-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
-  .name{font-family:var(--display);font-weight:600;font-size:clamp(2.7rem,7vw,4.4rem);line-height:.98;letter-spacing:-.015em;}
+  .head-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;}
+  .name{font-family:var(--display);font-weight:600;font-size:clamp(2.3rem,5.5vw,3.5rem);line-height:1;letter-spacing:-.015em;}
   .name .last{color:var(--accent);}
-  .role{font-family:var(--mono);font-size:clamp(.82rem,1.6vw,1rem);letter-spacing:.04em;color:var(--ink-soft);margin-top:18px;}
+  .role{font-family:var(--mono);font-size:clamp(.82rem,1.6vw,1rem);letter-spacing:.04em;color:var(--ink-soft);margin-top:14px;}
   .role b{color:var(--ink);font-weight:600;}
-  .avail{margin-top:14px;font-size:.95rem;color:var(--muted);}
+  .avail{margin-top:10px;font-size:.95rem;color:var(--muted);}
   .avail strong{color:var(--ink);font-weight:600;}
-  .photo{width:148px;height:148px;border-radius:4px;object-fit:cover;filter:grayscale(.18) contrast(1.02);
+  .photo{width:132px;height:132px;border-radius:4px;object-fit:cover;filter:grayscale(.18) contrast(1.02);
     border:1px solid var(--line-strong);box-shadow:6px 6px 0 var(--panel);
-    display:flex;align-items:center;justify-content:center;background:var(--accent);color:#f4f1ea;font-family:var(--display);font-size:54px;font-weight:600;}
-  .contacts{display:flex;flex-wrap:wrap;gap:0;margin-top:34px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);}
-  .contacts a{flex:1 1 auto;min-width:160px;padding:14px 4px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-decoration:none;display:flex;gap:9px;align-items:center;border-right:1px solid var(--line);transition:color .2s,background .2s;}
+    display:flex;align-items:center;justify-content:center;background:var(--accent);color:#f4f1ea;font-family:var(--display);font-size:48px;font-weight:600;}
+  .contacts{display:flex;flex-wrap:wrap;gap:0;margin-top:24px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);}
+  .contacts a{flex:1 1 auto;min-width:160px;padding:11px 4px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-decoration:none;display:flex;gap:9px;align-items:center;border-right:1px solid var(--line);transition:color .2s,background .2s;}
   .contacts a:last-child{border-right:none;}
   .contacts a:hover{color:var(--accent);background:rgba(27,77,91,.05);}
   .contacts .k{color:var(--muted);}
@@ -139,7 +140,7 @@
     body{background-size:28px 28px;font-size:16px;}
     header{padding:48px 0 18px;}
     .head-grid{grid-template-columns:1fr;align-items:start;gap:26px;}
-    .photo{width:120px;height:120px;order:-1;}
+    .photo{width:112px;height:112px;order:-1;}
     .contacts a{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line);}
     .contacts a:last-child{border-bottom:none;}
     .stats{grid-template-columns:1fr 1fr;gap:24px 0;}
