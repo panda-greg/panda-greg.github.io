@@ -1,851 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grigory Yakushev - Data & Analytics Architect</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .background-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.015;
-            z-index: 0;
-            pointer-events: none;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 40px, #3498db 40px, #3498db 41px),
-                repeating-linear-gradient(90deg, transparent, transparent 40px, #3498db 40px, #3498db 41px);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Header Card */
-        .header-card {
-            background: white;
-            border-radius: 16px;
-            padding: 48px;
-            margin-bottom: 32px;
-            box-shadow: 0 10px 40px rgba(52, 73, 94, 0.12);
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .profile-photo {
-            width: 180px !important;
-            height: 180px !important;
-            min-width: 180px !important;
-            min-height: 180px !important;
-            max-width: 180px !important;
-            max-height: 180px !important;
-            border-radius: 16px;
-            object-fit: cover;
-            border: 4px solid #ecf0f1;
-            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.2);
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-            display: block;
-            font-size: 56px;
-            color: white;
-            font-weight: 700;
-            letter-spacing: 2px;
-            flex-shrink: 0;
-        }
-        
-        .profile-photo-wrapper {
-            width: 180px;
-            height: 180px;
-            flex-shrink: 0;
-        }
-
-        .header-content {
-            flex: 1;
-        }
-
-        .name {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-
-        .title {
-            font-size: 20px;
-            color: #7f8c8d;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-
-        .contact {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            font-size: 14px;
-            color: #7f8c8d;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .contact-item a {
-            color: #3498db;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: #2980b9;
-        }
-
-        /* Section Cards */
-        .section {
-            background: white;
-            border-radius: 16px;
-            padding: 36px;
-            margin-bottom: 32px;
-            box-shadow: 0 8px 30px rgba(52, 73, 94, 0.1);
-            border-left: 4px solid #ecf0f1;
-            transition: all 0.3s;
-        }
-
-        .section:hover {
-            box-shadow: 0 12px 40px rgba(52, 152, 219, 0.15);
-            border-left-color: #3498db;
-        }
-
-        .section-title {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .section-icon {
-            font-size: 28px;
-        }
-
-        /* Summary */
-        .summary-card {
-            background: linear-gradient(135deg, #ebf5fb 0%, #d6eaf8 100%);
-            border-radius: 12px;
-            padding: 28px;
-            border-left: 4px solid #3498db;
-        }
-
-        .summary-text {
-            color: #34495e;
-            line-height: 1.8;
-            font-size: 15px;
-        }
-
-        /* Achievements Grid */
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        
-        @media (max-width: 1024px) {
-            .achievements-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .achievement-card {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            color: white;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
-        }
-
-        .achievement-number {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .achievement-text {
-            font-size: 13px;
-            line-height: 1.5;
-            opacity: 0.95;
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-category {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            padding: 24px;
-            border: 2px solid #dee2e6;
-            transition: all 0.3s;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-4px);
-            border-color: #3498db;
-            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.15);
-        }
-
-        .skill-category-title {
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: #2980b9;
-            font-size: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .skill-list {
-            color: #495057;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        /* Experience */
-        .experience-item {
-            margin-bottom: 32px;
-            padding: 28px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            border-left: 4px solid #3498db;
-            transition: all 0.3s;
-        }
-
-        .experience-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.15);
-        }
-
-        .job-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 6px;
-        }
-
-        .company {
-            font-size: 16px;
-            color: #3498db;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        .date-location {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-bottom: 16px;
-        }
-
-        .responsibilities {
-            list-style: none;
-            padding: 0;
-        }
-
-        .responsibilities li {
-            padding-left: 28px;
-            margin-bottom: 10px;
-            position: relative;
-            color: #34495e;
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        .responsibilities li:before {
-            content: "▸";
-            position: absolute;
-            left: 8px;
-            color: #3498db;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .project-highlight {
-            background: linear-gradient(135deg, #d6eaf8 0%, #aed6f1 100%);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 12px 0;
-            border-left: 4px solid #2980b9;
-        }
-
-        .project-title {
-            font-weight: 700;
-            color: #1f618d;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-
-        .tech-stack {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 2px solid #dee2e6;
-        }
-
-        .tech-label {
-            color: #6c757d;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tech-tag {
-            background: white;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #2980b9;
-            border: 2px solid #d6eaf8;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .tech-tag:hover {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
-            transform: translateY(-2px);
-        }
-
-        /* Education & Certifications */
-        .education-item, .cert-item {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 10px;
-            padding: 20px 24px;
-            margin-bottom: 16px;
-            border-left: 4px solid #3498db;
-            transition: all 0.3s;
-        }
-
-        .education-item:hover, .cert-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 16px rgba(52, 152, 219, 0.15);
-        }
-
-        .education-title, .cert-title {
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 6px;
-            font-size: 16px;
-        }
-
-        .education-details, .cert-details {
-            font-size: 14px;
-            color: #7f8c8d;
-        }
-
-        /* Recognition Badge */
-        .recognition-badge {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-            padding: 14px 20px;
-            border-radius: 10px;
-            margin-top: 12px;
-            color: white;
-            font-size: 14px;
-        }
-
-        .recognition-badge strong {
-            font-weight: 700;
-        }
-
-        /* Call to Action */
-        .cta {
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-            padding: 48px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 15px 50px rgba(52, 152, 219, 0.3);
-            color: white;
-        }
-
-        .cta-text {
-            font-size: 28px;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .cta-subtext {
-            font-size: 16px;
-            margin-bottom: 28px;
-            opacity: 0.95;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            background: white;
-            color: #3498db;
-            padding: 14px 32px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            font-size: 15px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .cta-button:hover {
-            background: #ecf0f1;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 20px 10px;
-            }
-
-            .header-card {
-                grid-template-columns: 1fr;
-                padding: 32px 24px;
-                text-align: center;
-                gap: 24px;
-                justify-items: center;
-            }
-
-            .profile-photo-wrapper {
-                margin: 0 auto;
-                width: 150px !important;
-                height: 150px !important;
-            }
-
-            .profile-photo {
-                margin: 0 auto;
-                width: 150px !important;
-                height: 150px !important;
-                min-width: 150px !important;
-                min-height: 150px !important;
-                max-width: 150px !important;
-                max-height: 150px !important;
-                font-size: 48px;
-            }
-
-            .name {
-                font-size: 32px;
-            }
-
-            .title {
-                font-size: 18px;
-            }
-
-            .contact {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-
-            .section {
-                padding: 24px 20px;
-            }
-
-            .skills-grid,
-            .achievements-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta {
-                padding: 32px 24px;
-            }
-
-            .cta-text {
-                font-size: 22px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grigory Yakushev — Analytics Engineer · BI &amp; Data Warehouse</title>
+<meta name="description" content="Grigory Yakushev — Analytics Engineer (BI &amp; Data Warehouse). 7+ years building data platforms end-to-end: SQL modeling, ELT pipelines, executive dashboards. Open to remote contract / B2B.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1ea;
+    --panel:#ece7dc;
+    --ink:#1c1b18;
+    --ink-soft:#4a4843;
+    --muted:#7a766c;
+    --line:#d8d2c4;
+    --line-strong:#c5bdab;
+    --accent:#1b4d5b;
+    --accent-soft:#2f6b7a;
+    --highlight:#b9622f;
+    --display:'Fraunces',Georgia,serif;
+    --body:'Hanken Grotesk',-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:34px 34px;
+    background-position:-1px -1px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    font-size:16.5px;
+  }
+  body::before{
+    /* paper warmth + soft vignette over the grid */
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 0%,rgba(244,241,234,0) 40%,rgba(244,241,234,.85) 100%);
+  }
+  .wrap{position:relative;z-index:1;max-width:940px;margin:0 auto;padding:0 26px;}
+
+  /* ---------- entrance animation ---------- */
+  .reveal{opacity:0;transform:translateY(18px);}
+  .in .reveal,.reveal.shown{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+  .in .reveal:nth-child(1){transition-delay:.05s}
+  .in .reveal:nth-child(2){transition-delay:.13s}
+  .in .reveal:nth-child(3){transition-delay:.21s}
+  .in .reveal:nth-child(4){transition-delay:.29s}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}}
+
+  /* ---------- header ---------- */
+  header{padding:72px 0 26px;}
+  .topline{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:26px;display:flex;gap:14px;align-items:center;}
+  .topline::after{content:"";flex:1;height:1px;background:var(--line-strong);}
+  .head-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
+  .name{font-family:var(--display);font-weight:600;font-size:clamp(2.7rem,7vw,4.4rem);line-height:.98;letter-spacing:-.015em;}
+  .name .last{color:var(--accent);}
+  .role{font-family:var(--mono);font-size:clamp(.82rem,1.6vw,1rem);letter-spacing:.04em;color:var(--ink-soft);margin-top:18px;}
+  .role b{color:var(--ink);font-weight:600;}
+  .avail{margin-top:14px;font-size:.95rem;color:var(--muted);}
+  .avail strong{color:var(--ink);font-weight:600;}
+  .photo{width:148px;height:148px;border-radius:4px;object-fit:cover;filter:grayscale(.18) contrast(1.02);
+    border:1px solid var(--line-strong);box-shadow:6px 6px 0 var(--panel);
+    display:flex;align-items:center;justify-content:center;background:var(--accent);color:#f4f1ea;font-family:var(--display);font-size:54px;font-weight:600;}
+  .contacts{display:flex;flex-wrap:wrap;gap:0;margin-top:34px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);}
+  .contacts a{flex:1 1 auto;min-width:160px;padding:14px 4px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-decoration:none;display:flex;gap:9px;align-items:center;border-right:1px solid var(--line);transition:color .2s,background .2s;}
+  .contacts a:last-child{border-right:none;}
+  .contacts a:hover{color:var(--accent);background:rgba(27,77,91,.05);}
+  .contacts .k{color:var(--muted);}
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:46px 0;border-top:1px solid var(--line-strong);}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:30px;}
+  .sec-idx{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em;}
+  .sec-title{font-family:var(--display);font-weight:600;font-size:1.55rem;letter-spacing:-.01em;}
+
+  /* summary */
+  .summary{font-size:1.18rem;line-height:1.62;max-width:62ch;color:var(--ink);}
+  .summary .em{color:var(--accent);font-weight:600;}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat{padding:6px 18px;border-left:1px solid var(--line-strong);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat .n{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1;color:var(--accent);}
+  .stat .c{font-family:var(--mono);font-size:11.5px;line-height:1.5;color:var(--muted);margin-top:10px;text-transform:uppercase;letter-spacing:.04em;}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;}
+  .skill{padding:18px 0;border-top:1px solid var(--line);}
+  .skill:nth-child(-n+2){border-top:none;}
+  .skill h4{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:10px;}
+  .skill p{font-size:.98rem;color:var(--ink-soft);}
+
+  /* experience */
+  .job{display:grid;grid-template-columns:200px 1fr;gap:30px;padding:30px 0;border-top:1px solid var(--line);}
+  .job:first-of-type{border-top:none;padding-top:6px;}
+  .job-meta .co{font-weight:700;font-size:1.02rem;}
+  .job-meta .co small{display:block;font-weight:400;color:var(--muted);font-size:.84rem;margin-top:3px;line-height:1.4;}
+  .job-meta .dt{font-family:var(--mono);font-size:11.5px;color:var(--accent);margin-top:12px;letter-spacing:.03em;}
+  .job-body .jt{font-family:var(--display);font-size:1.22rem;font-weight:600;margin-bottom:4px;letter-spacing:-.005em;}
+  .job-body ul{list-style:none;margin-top:12px;}
+  .job-body li{position:relative;padding-left:20px;margin-bottom:9px;font-size:1rem;color:var(--ink-soft);}
+  .job-body li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1px;background:var(--accent);}
+  .job-body li b{color:var(--ink);font-weight:600;}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .tag{font-family:var(--mono);font-size:11px;padding:4px 9px;border:1px solid var(--line-strong);border-radius:3px;color:var(--accent-soft);background:rgba(255,255,255,.35);}
+
+  /* meta lists */
+  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px 40px;}
+  .meta-block h4{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px;}
+  .meta-block ul{list-style:none;}
+  .meta-block li{padding:7px 0;border-top:1px solid var(--line);font-size:.97rem;color:var(--ink-soft);}
+  .meta-block li:first-child{border-top:none;}
+  .meta-block li b{color:var(--ink);font-weight:600;}
+
+  /* cta */
+  .cta{margin:50px 0 0;padding:44px;background:var(--ink);color:var(--paper);border-radius:5px;}
+  .cta h3{font-family:var(--display);font-weight:600;font-size:1.8rem;letter-spacing:-.01em;}
+  .cta p{color:#c9c4b8;margin-top:8px;font-size:1rem;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;}
+  .btn{font-family:var(--mono);font-size:13px;letter-spacing:.03em;text-decoration:none;padding:12px 22px;border-radius:4px;transition:transform .2s,background .2s;}
+  .btn.primary{background:var(--paper);color:var(--ink);}
+  .btn.ghost{border:1px solid #4a4843;color:var(--paper);}
+  .btn:hover{transform:translateY(-2px);}
+  .btn.ghost:hover{background:rgba(244,241,234,.08);}
+
+  footer{padding:34px 0 60px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:720px){
+    body{background-size:28px 28px;font-size:16px;}
+    header{padding:48px 0 18px;}
+    .head-grid{grid-template-columns:1fr;align-items:start;gap:26px;}
+    .photo{width:120px;height:120px;order:-1;}
+    .contacts a{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line);}
+    .contacts a:last-child{border-bottom:none;}
+    .stats{grid-template-columns:1fr 1fr;gap:24px 0;}
+    .stat{border-left:none;padding-left:0;}
+    .skills{grid-template-columns:1fr;}
+    .skill:nth-child(2){border-top:1px solid var(--line);}
+    .job{grid-template-columns:1fr;gap:14px;}
+    .meta-grid{grid-template-columns:1fr;}
+    .cta{padding:32px 24px;}
+  }
+</style>
 </head>
 <body>
-    <div class="background-pattern"></div>
-    
-    <div class="container">
-        <!-- Header Card with Photo -->
-        <div class="header-card">
-            <div class="profile-photo-wrapper">
-    				<img src="cv_photo.png" alt="Grigory Yakushev" class="profile-photo">
-			</div>
-            <div class="header-content">
-                <h1 class="name">Grigory Yakushev</h1>
-                <p class="title">Data & Analytics Architect | Product Owner | Technical Leader</p>
-                <div class="contact">
-                    <div class="contact-item">
-                        📍 Remote Worldwide
-                    </div>
-                    <div class="contact-item">
-                        ✉️ <a href="mailto:gregorysebalo@yahoo.com">gregorysebalo@yahoo.com</a>
-                    </div>
-                    <div class="contact-item">
-                        📱 +79150902290
-                    </div>
-                    <div class="contact-item">
-                        💼 <a href="https://linkedin.com/in/grigory-yakushev" target="_blank">LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="wrap">
 
-        <!-- Summary -->
-        <section class="section">
-            <h2 class="section-title"><span class="section-icon">👤</span>Professional Summary</h2>
-            <div class="summary-card">
-                <p class="summary-text">
-                    Data & Analytics Architect with 7+ years of experience delivering enterprise-scale BI, data warehousing, and analytics solutions across financial services, mining, manufacturing, and government sectors. Proven track record of leading cross-functional teams, architecting data platforms from scratch, and driving business value through data strategy. Successfully delivered $1M+ projects from initial sales through production deployment.
-                </p>
-                <br>
-                <p class="summary-text">
-                    <strong>Core Expertise:</strong> Data Architecture | Business Intelligence | Data Warehousing | Team Leadership | Product Ownership | Stakeholder Management
-                </p>
-            </div>
-        </section>
-
-        <!-- Key Achievements -->
-        <section class="section">
-            <h2 class="section-title"><span class="section-icon">🏆</span>Key Achievements</h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <div class="achievement-number">$1M+</div>
-                    <div class="achievement-text">Total project value delivered</div>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-number">1,000+</div>
-                    <div class="achievement-text">Users in KPI system launched in 3 months</div>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-number">50+</div>
-                    <div class="achievement-text">Dashboards delivered across 15+ clients</div>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-number">6 People</div>
-                    <div class="achievement-text">Max team size led</div>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-number">60%</div>
-                    <div class="achievement-text">Cost reduction via open-source migration</div>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-number">16 Months</div>
-                    <div class="achievement-text">Double promotion at EY</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Core Skills -->
-        <section class="section">
-            <h2 class="section-title"><span class="section-icon">⚡</span>Core Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <div class="skill-category-title">Data Platforms & Warehousing</div>
-                    <div class="skill-list">
-                        SAP BW/4HANA • Snowflake • PostgreSQL • Dremio • MS SQL Server • Data Lakehouse Architecture
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-category-title">Programming & Scripting</div>
-                    <div class="skill-list">
-                        Python (Advanced) • SQL (Expert) • JavaScript • VBA • Bash
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-category-title">BI & Visualization</div>
-                    <div class="skill-list">
-                        Power BI • Qlik • SAP Lumira • SAP Analytics Cloud • Tableau • Visiology • Apache Superset
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-category-title">ETL/ELT & Integration</div>
-                    <div class="skill-list">
-                        Apache Airflow • Apache NiFi • SSIS • Custom Python Pipelines
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-category-title">Process Mining & Analytics</div>
-                    <div class="skill-list">
-                        Celonis (Certified) • Process Analysis • KPI Design
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-category-title">ML & Data Science</div>
-                    <div class="skill-list">
-                        Scikit-learn • Pandas • Predictive Modeling • Anomaly Detection
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-category-title">Cloud & Infrastructure</div>
-                    <div class="skill-list">
-                        AWS • Linux Administration • Docker • API Development
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-category-title">Tools & Methods</div>
-                    <div class="skill-list">
-                        Figma (UX/UI) • Git • Agile/Scrum • Solution Architecture • Technical Sales
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience -->
-        <section class="section">
-            <h2 class="section-title"><span class="section-icon">💼</span>Professional Experience</h2>
-
-            <div class="experience-item">
-                <div class="job-title">Software Architect & Product Owner</div>
-                <div class="company">Cifrolab LLC</div>
-                <div class="date-location">April 2025 - November 2025 • Moscow, Russia (On-Site)</div>
-                <ul class="responsibilities">
-                    <li>Built and launched comprehensive KPI platform in 3 months serving 1,000+ users with 800+ input forms and 5,000+ KPIs</li>
-                    <li>Led cross-functional team of 6 (3 developers, 3 analysts), coordinating architecture, UX/UI design in Figma, and delivery</li>
-                    <li>Presented directly to Moscow Government ministers, translating complex technical solutions into business value</li>
-                    <li>Achieved production deployment on schedule, enabling real-time performance tracking across government departments</li>
-                    <li>Established product roadmap post-launch, prioritizing feature enhancements and managing bug resolution</li>
-                </ul>
-                <div class="tech-stack">
-                    <div class="tech-label">Technologies:</div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">Figma</span>
-                        <span class="tech-tag">RESTful APIs</span>
-                        <span class="tech-tag">Apache NiFi</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="job-title">BI/DWH Architect</div>
-                <div class="company">Softline (International IT Solutions Provider)</div>
-                <div class="date-location">September 2024 - April 2025 • Russia (Remote)</div>
-                <ul class="responsibilities">
-                    <li>Architected BI solutions for Alfa Bank (Power BI, MS SQL), Johnson & Johnson (Qlik, Snowflake), and Kamaz (Visiology)</li>
-                    <li>Enabled sales success by designing technical proposals, conducting sizing analysis, and presenting architecture decisions to C-level stakeholders</li>
-                    <li>Optimized performance of existing dashboards and reporting infrastructure, reducing query times by 40%+</li>
-                </ul>
-                <div class="tech-stack">
-                    <div class="tech-label">Technologies:</div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Power BI</span>
-                        <span class="tech-tag">Qlik</span>
-                        <span class="tech-tag">Snowflake</span>
-                        <span class="tech-tag">MS SQL Server</span>
-                        <span class="tech-tag">Visiology</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="job-title">BI/DWH Expert (Senior Consultant → Expert)</div>
-                <div class="company">BeringPro (ex. BearingPoint)</div>
-                <div class="date-location">November 2019 - September 2024 • Russia (Remote/Hybrid)</div>
-                <p class="summary-text" style="margin-bottom: 16px; color: #495057;">Progressed from Senior Consultant to Expert through delivery of complex data warehouse and analytics projects for Fortune 500 clients. Led technical teams, architected solutions, and drove business development.</p>
-                
-                <div class="project-highlight">
-                    <div class="project-title">Data Platform Transformation Lead | Ball Corporation (Arnest) (Dec 2022 - Sep 2024)</div>
-                    <ul class="responsibilities">
-                        <li>Sold and delivered $400K+ project to migrate from proprietary SAP BW/Qlik stack to open-source architecture</li>
-                        <li>Designed end-to-end architecture including PostgreSQL data warehouse, Insight BI platform, and ETL pipelines</li>
-                        <li>Led team of 5 engineers, pioneering implementation on new technology stack with zero client documentation</li>
-                        <li>Rebuilt 30+ dashboards from screenshots and stakeholder interviews, maintaining business continuity</li>
-                    </ul>
-                </div>
-
-                <div class="project-highlight">
-                    <div class="project-title">BI Strategy Architect | Polyus Gold (2023)</div>
-                    <ul class="responsibilities">
-                        <li>Defined migration roadmap from SAP ecosystem to open-source BI/DWH stack, evaluating platforms and TCO</li>
-                        <li>Delivered architecture blueprint adopted by C-suite for multi-year transformation program</li>
-                        <li>Presented business case demonstrating 60% cost reduction while improving scalability</li>
-                    </ul>
-                </div>
-
-                <div class="project-highlight">
-                    <div class="project-title">Data Warehouse Developer | Segezha Group (Feb 2020 - Aug 2022)</div>
-                    <ul class="responsibilities">
-                        <li>Built production planning analytics on SAP BW/4HANA, creating 10+ operational reports used daily by plant managers</li>
-                        <li>Integrated MES systems with enterprise data warehouse, enabling real-time production monitoring</li>
-                        <li>Developed hybrid reporting solution combining SAP BW and Excel VBA for regulatory compliance</li>
-                        <li>Achieved SAP BW/4HANA certification during project delivery</li>
-                    </ul>
-                </div>
-
-                <div class="project-highlight">
-                    <div class="project-title">Analytics Team Lead | Polyus Gold (Nov 2019 - Jan 2020)</div>
-                    <ul class="responsibilities">
-                        <li>Led team of 3 consultants building comprehensive SAP S/4HANA analytics across PP, MM, SD, and GRC modules</li>
-                        <li>Created 10+ executive dashboards in SAP Lumira, interfacing directly with C-level stakeholders</li>
-                        <li>Coordinated with cross-functional teams (BW, ERP) to ensure data quality and business alignment</li>
-                    </ul>
-                </div>
-
-                <div class="tech-stack">
-                    <div class="tech-label">Technologies:</div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">SAP BW/4HANA</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">Power BI</span>
-                        <span class="tech-tag">Qlik</span>
-                        <span class="tech-tag">SAP Lumira</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Airflow</span>
-                        <span class="tech-tag">NiFi</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="job-title">RPA Developer → Advanced Staff (Analyst)</div>
-                <div class="company">Ernst & Young (EY Russia)</div>
-                <div class="date-location">July 2018 - November 2019 • Moscow, Russia</div>
-                <p class="summary-text" style="margin-bottom: 16px; color: #495057;">Launched IT career in EY's Technology Consulting practice, rapidly advancing through technical certifications and delivery of automation, analytics, and ML solutions.</p>
-                
-                <ul class="responsibilities">
-                    <li><strong>Planning Solution Developer | Avilon Auto Dealer:</strong> Implemented SAP Analytics Cloud planning solution with predictive ML model for agricultural forecasting</li>
-                    <li><strong>ML Engineer | PhosAgro:</strong> Developed anomaly detection models for production process optimization at chemical plant</li>
-                    <li><strong>Process Mining Analyst | Sibur:</strong> Built ETL pipelines using MS SSIS, created Power BI dashboards revealing Source-to-Pay bottlenecks with Celonis</li>
-                    <li><strong>ML Analyst | Nordgold Mining:</strong> Built predictive models for gold recovery optimization using feature engineering</li>
-                    <li><strong>RPA Developer | Alfa Bank:</strong> Developed Blue Prism automation robots, reducing manual processing time by 70%</li>
-                </ul>
-
-                <div class="recognition-badge">
-                    <strong>🌟 Recognition:</strong> Double promotion in 16 months, received PlatEYnum Standard Award for exceptional performance
-                </div>
-
-                <div class="tech-stack">
-                    <div class="tech-label">Technologies:</div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Blue Prism</span>
-                        <span class="tech-tag">Celonis (Certified)</span>
-                        <span class="tech-tag">SAP Analytics Cloud</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Power BI</span>
-                        <span class="tech-tag">MS SSIS</span>
-                        <span class="tech-tag">SAP BW</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education -->
-        <section class="section">
-            <h2 class="section-title"><span class="section-icon">🎓</span>Education</h2>
-            <div class="education-item">
-                <div class="education-title">Master's Degree — Applied Mathematics & Informatics</div>
-                <div class="education-details">RUDN University, Moscow • 2018</div>
-            </div>
-            <div class="education-item">
-                <div class="education-title">Bachelor's Degree — Applied Mathematics & Informatics</div>
-                <div class="education-details">RUDN University, Moscow • 2016</div>
-            </div>
-        </section>
-
-
-        <!-- Certifications -->
-        <section class="section"><function_calls>
-		<invoke name="artifacts">
-		<parameter name="command">update</parameter>
-		<parameter name="id">resume-bright-bidwh</parameter>
-		<parameter name="old_str">        <!-- Certifications -->
-		<section class="section</parameter>
-		<parameter name="new_str">        <!-- Certifications -->
-		<section class="section">
-		<h2 class="section-title"><span class="section-icon">📜</span>Certifications</h2>
-		<div class="cert-item">
-		<div class="cert-title">SAP Certified Application Associate — BW/4HANA 2.x</div>
-		<div class="cert-details">SAP</div>
-		</div>
-		<div class="cert-item">
-		<div class="cert-title">Visiology Platform (Advanced, Basic, Administrator, Smart Forms)</div>
-		<div class="cert-details">Visiology</div>
-		</div>
-		<div class="cert-item">
-		<div class="cert-title">Knowledge Space – Basic Course</div>
-		<div class="cert-details">Knowledge Space</div>
-		</div>
-		<div class="cert-item">
-		<div class="cert-title">Power BI Fundamentals</div>
-		<div class="cert-details">Udemy</div>
-		</div>
-		</section>
-
-        <!-- What I Bring -->
-    <section class="section">
-        <h2 class="section-title"><span class="section-icon">💡</span>What I Bring</h2>
-        <div class="summary-card">
-            <p class="summary-text">
-                I bridge the gap between business strategy and technical execution. My consulting background taught me to listen deeply to stakeholders, my architecture experience enables me to design scalable solutions, and my product ownership skills ensure I deliver outcomes that matter. I don't chase specific technologies—I focus on solving business problems with the right tools, leveraging AI and modern practices to accelerate delivery without sacrificing quality.
-            </p>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <div class="cta">
-        <div class="cta-text">Let's Build Something Great Together</div>
-        <div class="cta-subtext">Available for consulting, architecture, and leadership roles</div>
-        <div class="cta-buttons">
-            <a href="mailto:gregorysebalo@yahoo.com" class="cta-button">📧 Email Me</a>
-            <a href="https://linkedin.com/in/grigory-yakushev" target="_blank" class="cta-button">💼 LinkedIn</a>
-        </div>
+  <!-- ============ HEADER ============ -->
+  <header id="top">
+    <div class="topline reveal">Curriculum Vitae · Analytics Engineer</div>
+    <div class="head-grid">
+      <div>
+        <h1 class="name reveal">Grigory<br><span class="last">Yakushev</span></h1>
+        <div class="role reveal"><b>Analytics Engineer</b> · BI &amp; Data Warehouse</div>
+        <div class="avail reveal">Based in Florianópolis, Brazil (UTC−3) · <strong>Open to remote worldwide</strong> — contractor / B2B</div>
+      </div>
+      <img class="photo reveal" src="cv_photo.png" alt="Grigory Yakushev"
+           onerror="this.outerHTML='&lt;div class=&quot;photo reveal&quot; aria-label=&quot;Grigory Yakushev&quot;&gt;GY&lt;/div&gt;'">
     </div>
+    <nav class="contacts reveal">
+      <a href="mailto:gregorysebalo@yahoo.com"><span class="k">@</span>gregorysebalo@yahoo.com</a>
+      <a href="https://t.me/pandagreg" target="_blank" rel="noopener"><span class="k">tg</span>@pandagreg</a>
+      <a href="https://www.linkedin.com/in/grigory-yakushev/" target="_blank" rel="noopener"><span class="k">in</span>LinkedIn</a>
+      <a href="https://github.com/panda-greg" target="_blank" rel="noopener"><span class="k">gh</span>GitHub</a>
+    </nav>
+  </header>
+
+  <!-- ============ SUMMARY ============ -->
+  <section id="summary">
+    <div class="sec-head"><span class="sec-idx">01</span><h2 class="sec-title">Profile</h2></div>
+    <p class="summary">
+      Analytics engineer and BI / data-warehouse specialist with <span class="em">7+ years</span>
+      building data platforms end-to-end — from SQL modeling and ELT pipelines to executive-facing
+      dashboards. Recently launched a city-scale KPI platform from scratch in three months. Spent
+      five years at a global consultancy delivering BI and data-warehouse solutions for enterprise
+      clients in mining, manufacturing and banking. Strong in SQL, Python, Airflow / NiFi, PostgreSQL,
+      Snowflake and SAP BW/4HANA. Native Russian, near-native English.
+    </p>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section id="impact">
+    <div class="sec-head"><span class="sec-idx">02</span><h2 class="sec-title">Selected Impact</h2></div>
+    <div class="stats">
+      <div class="stat reveal"><div class="n">7+</div><div class="c">years across<br>EY · BearingPoint · Cifrolab</div></div>
+      <div class="stat reveal"><div class="n">1,000+</div><div class="c">users · 5,000+ KPIs<br>platform built in 3 months</div></div>
+      <div class="stat reveal"><div class="n">$400k+</div><div class="c">BI/DWH project<br>co-sold &amp; delivered</div></div>
+      <div class="stat reveal"><div class="n">5</div><div class="c">engineers led on<br>open-source DWH rebuild</div></div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills">
+    <div class="sec-head"><span class="sec-idx">03</span><h2 class="sec-title">Core Skills</h2></div>
+    <div class="skills">
+      <div class="skill"><h4>Data modeling &amp; SQL</h4><p>Advanced SQL, dimensional modeling, data warehouse &amp; lakehouse design, performance tuning, capacity sizing.</p></div>
+      <div class="skill"><h4>Pipelines &amp; integration</h4><p>ELT / ETL (Apache Airflow, Apache NiFi, dbt), PostgreSQL, MS SQL, Snowflake, SAP BW/4HANA, system &amp; manufacturing-data integration.</p></div>
+      <div class="skill"><h4>BI &amp; visualization</h4><p>Power BI, Qlik, SAP Analytics Cloud, SAP Lumira, Visiology.</p></div>
+      <div class="skill"><h4>Programming</h4><p>Python, JavaScript, VBA, Linux CLI.</p></div>
+      <div class="skill"><h4>Delivery &amp; leadership</h4><p>Requirements gathering, executive &amp; government stakeholder management, technical presales, team &amp; tech leadership.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience">
+    <div class="sec-head"><span class="sec-idx">04</span><h2 class="sec-title">Experience</h2></div>
+
+    <!-- Career break -->
+    <article class="job">
+      <div class="job-meta">
+        <div class="co">Independent<small>Self-directed · relocation to Brazil</small></div>
+        <div class="dt">Nov 2025 — Present</div>
+      </div>
+      <div class="job-body">
+        <div class="jt">Career break</div>
+        <ul>
+          <li>Self-studied <b>dbt</b> and built hands-on transformation pipelines, closing the core analytics-engineering toolchain gap.</li>
+          <li>Designed and shipped an end-to-end analytics bot in <b>Python</b>: ingests daily data from multiple sources into <b>PostgreSQL</b> and uses an LLM (Claude) to generate automated week-over-week insights, delivered through a <b>Telegram</b> interface.</li>
+          <li>Started building foundations in <b>blockchain</b> and Web3 — smart contracts and on-chain data.</li>
+        </ul>
+        <div class="tags"><span class="tag">dbt</span><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">LLM / Claude</span><span class="tag">Telegram</span></div>
+      </div>
+    </article>
+
+    <!-- Cifrolab -->
+    <article class="job">
+      <div class="job-meta">
+        <div class="co">Cifrolab<small>Moscow, Russia · 3-month build-and-launch mandate</small></div>
+        <div class="dt">Apr 2025 — Nov 2025</div>
+      </div>
+      <div class="job-body">
+        <div class="jt">Software Architect / Product Owner</div>
+        <ul>
+          <li>Built and launched a city-scale KPI platform <b>from scratch in 3 months</b>, leading a <b>6-person team</b> of analysts and full-stack developers.</li>
+          <li>Scaled the live product to <b>1,000+ users, 800+ input forms and 5,000+ KPIs</b>; presented outcomes directly to a Moscow city-government minister (urban development).</li>
+          <li>Designed the UX/UI in Figma, defined the architecture, and owned the product through production launch and post-release iteration.</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">Figma</span><span class="tag">Apache NiFi</span></div>
+      </div>
+    </article>
+
+    <!-- Softline -->
+    <article class="job">
+      <div class="job-meta">
+        <div class="co">Softline<small>Moscow, Russia</small></div>
+        <div class="dt">Sep 2024 — Apr 2025</div>
+      </div>
+      <div class="job-body">
+        <div class="jt">BI / Data Warehouse Architect</div>
+        <ul>
+          <li>Led technical solution design and effort estimates for BI / data-warehouse proposals as the BI/DWH expert in presales.</li>
+          <li>Delivered BI / data-warehouse development for enterprise clients, including Johnson &amp; Johnson (global healthcare — Qlik, Snowflake), Alfa-Bank (Power BI, MS SQL) and Kamaz (Visiology).</li>
+        </ul>
+        <div class="tags"><span class="tag">Qlik</span><span class="tag">Snowflake</span><span class="tag">Power BI</span><span class="tag">MS SQL</span><span class="tag">Visiology</span></div>
+      </div>
+    </article>
+
+    <!-- BearingPoint -->
+    <article class="job">
+      <div class="job-meta">
+        <div class="co">BearingPoint<small>now BeringPro · global management &amp; technology consultancy · Moscow, Russia</small></div>
+        <div class="dt">Nov 2019 — Sep 2024</div>
+      </div>
+      <div class="job-body">
+        <div class="jt">Senior Business Consultant → Expert</div>
+        <ul>
+          <li>Co-sold a <b>$400k+</b> BI / data-warehouse project; promoted from Senior Consultant to Expert.</li>
+          <li>Architected and led a <b>5-person team</b> to rebuild enterprise BI and a <b>PostgreSQL data warehouse</b> on an open-source stack for a global packaging manufacturer — replacing a legacy Qlik + SAP BW system from screenshots alone, as architect, tech lead and lead developer.</li>
+          <li>Delivered <b>10+</b> SAP BW/HANA production reports during an 18-month build phase for a major forestry group, integrated manufacturing-execution-system data into the warehouse, and earned SAP BW/4HANA certification.</li>
+          <li>Led a <b>3-person team</b> to ship <b>10+</b> executive dashboards across procurement, sales and finance for one of the world's largest gold miners; owned requirements gathering and C-level presentations.</li>
+          <li>Advised the same client on SAP-to-open-source migration strategy, selecting the target stack and designing the reference architecture.</li>
+        </ul>
+        <div class="tags"><span class="tag">SAP BW/4HANA</span><span class="tag">PostgreSQL</span><span class="tag">Qlik</span><span class="tag">Power BI</span><span class="tag">SAP Lumira</span><span class="tag">Airflow</span><span class="tag">NiFi</span><span class="tag">Python</span></div>
+      </div>
+    </article>
+
+    <!-- EY -->
+    <article class="job">
+      <div class="job-meta">
+        <div class="co">EY (Ernst &amp; Young)<small>Big Four professional services · Moscow, Russia</small></div>
+        <div class="dt">Jul 2018 — Nov 2019</div>
+      </div>
+      <div class="job-body">
+        <div class="jt">Technology Consultant</div>
+        <ul>
+          <li>Automated back-office operations for Alfa-Bank with <b>3 RPA robots</b> that replaced roughly <b>15 full-time roles'</b> worth of monthly manual work; certified as a Blue Prism developer within 3 months.</li>
+          <li>Analyzed SAP ERP usage across <b>1,000+ users</b> at a major petrochemical company — built ELT pipelines, six ad-hoc interactive dashboards and a Python log (SM20) parser; certified in Celonis process mining.</li>
+          <li>Earned a double promotion and a top-tier internal performance award.</li>
+        </ul>
+        <div class="tags"><span class="tag">Blue Prism</span><span class="tag">Celonis</span><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">SAP ERP</span></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ CERTS / LANG / EDU ============ -->
+  <section id="more">
+    <div class="sec-head"><span class="sec-idx">05</span><h2 class="sec-title">Certifications · Languages · Education</h2></div>
+    <div class="meta-grid">
+      <div class="meta-block">
+        <h4>Certifications</h4>
+        <ul>
+          <li><b>SAP Certified Application Associate</b> — BW/4HANA 2.x</li>
+          <li>Power BI Fundamentals</li>
+          <li>Blue Prism</li>
+          <li>Celonis Process Mining</li>
+          <li>Visiology (Advanced / Admin)</li>
+        </ul>
+      </div>
+      <div class="meta-block">
+        <h4>Languages</h4>
+        <ul>
+          <li><b>Russian</b> — native</li>
+          <li><b>English</b> — near-native (C1–C2)</li>
+        </ul>
+        <h4 style="margin-top:24px">Education</h4>
+        <ul>
+          <li><b>MSc</b> Applied Mathematics &amp; Informatics — RUDN University (2018)</li>
+          <li><b>BSc</b> Applied Mathematics &amp; Informatics — RUDN University (2016)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <div class="cta reveal">
+    <h3>Let's build a data platform worth keeping.</h3>
+    <p>Available now for remote analytics-engineering and BI/DWH work — contractor / B2B.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="mailto:gregorysebalo@yahoo.com">Email me</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/grigory-yakushev/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/panda-greg" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>© <span id="yr"></span> Grigory Yakushev</span>
+    <span>Analytics Engineer · BI &amp; Data Warehouse · UTC−3</span>
+  </footer>
+
 </div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // header reveals on load
+  requestAnimationFrame(()=>document.querySelector('header').parentElement.classList.add('in'));
+  // section reveals on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('shown'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('section .reveal, .cta.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
-</parameter>
